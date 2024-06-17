@@ -1,0 +1,22 @@
+# שימוש בדימוי בסיסי של Node.js
+FROM node:14
+
+# יצירת ספריית העבודה
+WORKDIR /app
+
+# העתקת קבצי היישום
+COPY package*.json ./
+RUN npm install
+COPY . .
+
+# בניית היישום
+RUN npm run build
+
+# התקנת serve להרצת האפליקציה
+RUN npm install -g serve
+
+# פתיחת פורט 3000
+EXPOSE 3000
+
+# פקודת ההרצה של היישום
+CMD ["serve", "-s", "build"]

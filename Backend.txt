@@ -1,0 +1,21 @@
+# שימוש בדימוי בסיסי של Python
+FROM python:3.9
+
+# הגדרת משתנה סביבתי שיאפשר פייתון לא לשמור קבצים כשינויים ב-output יקרו
+ENV PYTHONUNBUFFERED 1
+
+# יצירת ספריית העבודה
+WORKDIR /app
+
+# התקנת התלויות
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# העתקת קבצי היישום
+COPY . .
+
+# פתיחת פורט 5000
+EXPOSE 5000
+
+# פקודת ההרצה של היישום
+CMD ["python", "app.py"]
